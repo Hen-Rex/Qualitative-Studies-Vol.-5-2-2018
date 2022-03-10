@@ -1,0 +1,137 @@
+
+%some packages are included in 'Memoir', such as tocbibind and tabularx
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% START PREAMBLE.tex %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{titling} % titlesec & titletoc incompatible with 'Memoir'
+
+%% stavekontrol, main language put last for babel. Use it around text of different language than main for correct hyphenation and spelling with the commands \begin{otherlanguage}{french} ... \end{otherlanguage}
+\usepackage[main=english]{babel}
+
+% Choose font encoding /alphabet. Skal være før UTF8(x).
+%\usepackage[T1]{fontenc} % Not required with LuaLatex.
+    %\usepackage[utf8]{inputenc} % Not required with LuaLatex
+
+%\usepackage{lmodern} % font family in document Latin Modern
+\usepackage[no-math]{fontspec} % used to choose font in document. NICE FONTS: Linux Libertine O (and *-Display O for headings), MinionPro, Adobe Garamond Pro, or Adobe Caslon.
+    \setmainfont{Linux Libertine O}
+    \setsansfont{TeX Gyre Adventor}
+%   \setmonofont{}[] % probably don't use this one.
+
+\usepackage{textcomp}
+\usepackage{academicons} % SPECIAL USE, see 
+\usepackage{gensymb} %special symbols
+\usepackage[left]{eurosym} % brug hellere 'currency' package.
+\usepackage{currency} % see defined currencies in macros
+\usepackage{siunitx} % fx \SI{1e-10}{\meter\per\second}
+    \sisetup{output-decimal-marker={.},group-separator={\,},group-minimum-digits=4,detect-all=true}
+\usepackage[en-GB,datesep=-,datetimesep=\space,showseconds=false,timesep=:,timezonesep=\space,useregional=text]{datetime2}
+    \DTMlangsetup[en-GB]{mapzone=true,ord=raise}
+    \DTMsettimestyle{default}
+
+\usepackage{epigraph} %epigraf, i kapitler
+\usepackage[super]{nth} % til ordinaler \nth{1} \nth{2}, osv. Virker kun på engelsk!
+\usepackage{lettrine}
+    \setlength{\DefaultFindent}{0.2em}
+    \setlength{\DefaultNindent}{0em}
+
+%\usepackage[colaction]{adjmulticol} % adjmulticols loses text w/o errors at overfull. StackExchange criticizes this behavior. Please use \begin{adjustwidth}{}{} instead
+\usepackage{multicol} % specified explicitly to use 'setlength' below.
+    \setlength{\columnsep}{2em} % column separator
+
+\usepackage[flushmargin,hang,splitrule]{footmisc} % Bruges til at definere fodnoter med \thanks, så de er ens
+    \counterwithout{footnote}{chapter}
+    \setlength{\footnotemargin}{0.5em} % indrykning på fodnoter (se ovenfor)
+
+%    \usepackage{luatexbase} % remove from microtype 2.7b and above.
+\usepackage{microtype} % fikser overfull boxes og character protusion. BEMÆRK! Problems with this package with TexLive2018 using LuaLaTeX. Prepend \usepackage{luatexbase}
+
+% Graphics packages
+\usepackage{graphicx}
+\usepackage{xcolor,colortbl}
+%\usepackage{epstopdf} % not supported by XeLaTeX
+\usepackage{wrapfig}
+\usepackage{pgfplots}
+    \pgfplotsset{compat=newest}
+\usepackage{filecontents}
+
+%%%%% Qualitative Studies's farver
+%% Primary Colors
+\definecolor{qs.violetlight.RGB}{RGB}{89,129,231}
+\definecolor{qs.violetdark.RGB}{RGB}{60,78,176}
+\definecolor{qs.blue.RGB}{RGB}{48,57,154}
+\definecolor{qs.violetlight.CMYK}{cmyk}{0.67, 0.49, 0.00, 0.00}
+\definecolor{qs.violetdark.CMYK}{cmyk}{0.86, 0.78, 0.00, 0.00}
+\definecolor{qs.blue.CMYK}{cmyk}{0.96, 0.92, 0.00, 0.00}
+
+\usepackage{pdfpages} % to integrate pdf-files in e.g. Appendix
+\usepackage{pdflscape} % til landscape mode sider. Alternativ til lscape, som ikke roterer siden automatisk i PDF. lscape skal bruges til latex-compiler, alle andre bruger pdflscape
+\usepackage{rotating} % alternativ til lscape. Virker også på tabeller.
+\usepackage{afterpage} %for at nulstille background color
+
+% Sample text for testing
+%\usepackage{lipsum} %sample text (lorem ipsum)
+%\usepackage{blindtext} %sample text. Use blindmathtrue and blindmathpaper to generate sample math text
+
+\usepackage{totcount} % Equation counter, etc.
+%% http://ftp.jaist.ac.jp/pub/CTAN/macros/latex/contrib/pageslts/pageslts.pdf
+\usepackage[pagecontinue=true]{pageslts} % Pages counter. pagecontinue does not restart. pagenumbering, hvis der er et break. Option: [pagecontinue=false]
+\usepackage[]{silence} % can be used with option [debrief]
+\WarningFilter{undolabl}{Label `pagesLTS.arabic' overridden}
+\WarningFilter{undolabl}{Label `pagesLTS.arabic.local' overridden} % overskriv latterlige advarsler fra 'undolabl' ifm. pagesLTS
+\WarningFilter{pageslts}{Package pdfpages detected.}
+
+%% Maths
+% Pretty much all of the ams maths packages
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+% Tables
+\usepackage{tabularx,array,multirow,ltablex} % multirow can extend multiple pages
+% Set up how figure and table captions are displayed
+    \renewcommand\tabularxcolumn[1]{m{#1}}
+\usepackage{placeins} % use \FloatBarrier to block floats from drifting to other pages.
+
+\usepackage[justification=justified,font=small,labelfont=bf,textfont=normalfont,textformat=period,singlelinecheck=off,format=hang]{caption,subcaption}
+
+%\usepackage[innercaption]{sidecap} % caption to the side of figure
+
+\usepackage[modulo,switch]{lineno} % Line numbers. See macros for llabel and fullref/halfref custom commands
+
+\usepackage[inline]{enumitem} % definerer inline lists med starred commands af itemize*, enumerate*, description*.
+    \setlist[description]{font=\normalfont\scshape}
+
+%%%%%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%
+%%%%% Se også Macros.tex \DefineBibliographyStrings{}
+% http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+%\usepackage[apabackref=true,autolang=hyphen,backend=biber,backref=true,bibstyle=apa,citestyle=apa,doi=true,hyperref=true,isbn=true,refsegment=part,sortlocale=auto,url=true]{biblatex}
+%    \DeclareLanguageMapping{danish}{danish-apa} %% kan erstattes med american og american-apa (husk også at ændre i babel). apabackref=true for at vise p. og pp.
+%    \addbibresource{paper1/9_references.tex} % lokationen på bibliografien
+\usepackage{bibunits}
+\usepackage[style=danish,danish=guillemets]{csquotes}
+    \MakeInnerQuote{"}
+    \AtBeginEnvironment{quote}{\itshape}
+% see documentation of properties: http://mirrors.dotsrc.org/ctan/macros/latex/contrib/csquotes/csquotes.pdf
+%####
+%############ END BIBLIOGRAPHY ###############
+
+
+%%%%%%%%%%%%%%%%% START HYPERREF LAST %%%%%%%%%%%%%%%%%
+%%%%%
+    \PassOptionsToPackage{hyphens}{url} % line breaking in URL
+\usepackage[bookmarks=true,bookmarksdepth=10,breaklinks=true,hidelinks,hyperfigures=true,hyperindex=true,hypertexnames=false,linktoc=all,pdfencoding=auto,pdfpagelabels=true,plainpages=false,urlcolor=black]{hyperref}
+    \urlstyle{same} % sets font to the same as surrounding text
+%
+\usepackage[inline]{showlabels} % must come after hyperref. Works only in draft mode.
+    \renewcommand{\showlabelfont}{\tiny\bfseries\color{red}}
+%
+\usepackage{bookmark} % SKAL komme efter \usepackage{hyperref}
+%####
+%################# END HYPERREF LAST ##################
+
+
+%#######################################################
+%################ END PREAMBLE.tex #####################
+%#######################################################

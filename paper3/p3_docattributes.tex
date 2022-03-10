@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% START P3_DOCATTRIBUTES.tex %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% TITLE PAPER1
+%%%%%
+\title{Health Care Professionalism Without Doctors}
+\subtitle{Spatial Surroundings and Counter-Identification in Local Health Houses}
+\fulltitle{\thetitle:\\\theSubtitle} % the entire title to be edited in one place
+\headertitle{\theSubtitle}
+
+
+%%%%%%%%%% AUTHORS PAPER1
+%%%%%
+\makeatletter % requires 'keyval' package
+%
+\define@key{author1}{name}[Marie Østergaard Møller]{#1}
+\define@key{author1}{initialsname}[M.~Møller]{#1}
+\define@key{author1}{title}[]{#1}
+\define@key{author1}{institution}[Department of Political Science, Aalborg University, Denmark]{#1}
+\define@key{author1}{email}[\mailto{mol@dps.aau.dk}]{#1}
+\define@key{author1}{tel}[\href{tel:+4528403379}{tel: +45 28 40 33 79}]{#1}
+\define@key{author1}{orcidID}[\theORCIDiDgreen{0000-0001-9159-4630}]{#1}
+%%%%%
+%
+\makeatother
+%
+%#########
+
+
+%%%%%%%%%% Print Author
+%%%%%
+\author{\protect\setkeys{author1}{name}~\protect\setkeys{author1}{orcidID}
+%
+\smallskip
+%
+\footnotesize{
+\\\emph{\protect\setkeys{author1}{institution}}
+\\{\protect\setkeys{author1}{email}, \protect\setkeys{author1}{tel}}%
+}}
+%####
+%#########
+
+
+%#######################################################
+%############# END P3_DOCATTRIBUTES.tex #################
+%#######################################################

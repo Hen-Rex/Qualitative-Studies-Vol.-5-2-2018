@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% START P4_DOCATTRIBUTES.tex %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% TITLE PAPER1
+%%%%%
+\title{Using Ignorance as (\emph{Un})Conscious Bureaucratic Strategy}
+\subtitle{Street-Level Practices and Structural Influences in the Field of Migration Enforcement}
+\fulltitle{\thetitle: \theSubtitle} % the entire title to be edited in one place
+\headertitle{\theSubtitle}
+
+
+%%%%%%%%%% AUTHORS PAPER1
+%%%%%
+\makeatletter % requires 'keyval' package
+%
+\define@key{author1}{name}[Lisa Marie Borrelli]{#1}
+\define@key{author1}{initialsname}[L.~Borrelli]{#1}
+\define@key{author1}{title}[]{#1}
+\define@key{author1}{institution}[Institute of Sociology, University of Bern, Switzerland]{#1}
+\define@key{author1}{email}[\mailto{lisa.borrelli@soz.unibe.ch}]{#1}
+\define@key{author1}{tel}[\href{tel:+41316314829}{tel:~+41 31 631 48 29}]{#1}
+\define@key{author1}{fax}[\href{fax:+41316314817}{fax:~+41 31 631 48 17}]{#1}
+\define@key{author1}{orcidID}[\theORCIDiDgreen{0000-0001-8547-320X}]{#1}
+%%%%%
+%
+\makeatother
+%
+%#########
+
+
+%%%%%%%%%% Print Author
+%%%%%
+\author{\protect\setkeys{author1}{name}~\protect\setkeys{author1}{orcidID}
+%
+\smallskip
+%
+\footnotesize{
+\\\emph{\protect\setkeys{author1}{institution}}
+\\{\protect\setkeys{author1}{email}, \protect\setkeys{author1}{tel}, \protect\setkeys{author1}{fax}}%
+}}
+%####
+%#########
+
+
+%#######################################################
+%############# END P4_DOCATTRIBUTES.tex #################
+%#######################################################

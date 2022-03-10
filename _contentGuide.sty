@@ -1,0 +1,148 @@
+
+%%%%%%%%%% En PDF:
+\includepdf[pages=1,fitpaper,keepaspectratio,offset=0mm 0mm,scale=0.9,pagecommand={\chapter{Appendices}\label{appendix:a:1}\thispagestyle{ruled}}]{paper3/p3_data/p3_appendix-rev8.pdf}
+    \clearpage
+\includepdf[pages=2-,fitpaper,keepaspectratio,offset=0mm 0mm,scale=0.9,pagecommand={\thispagestyle{ruled}}]{paper3/p3_data/p3_appendix-rev8.pdf}
+
+Pagecommand \chapter er, hvis der fx skal være en titel på samme side som pdf'en er indsat. Bliver indsat på alle sider, så skal deles op i "forsiden" og "resten".
+HUSK! at ændre pagestyle under pagecommand!
+
+
+%%%%%%%%%% Indsæt et enkelt billede:
+
+    1) Ændr filstien under "includegraphics" til det rigtige billede.
+    2) Man skal ændre captions, som skal inkludere filtrering
+    3) Labels skal ændres (fig:type:spørgsmål)
+    4) Billeder refereres med \fref{fig:type:spørgsmål}. \fref = figur reference
+
+HUSK, at SCfigure kommer fra sidecap--pakken, som stiller captions til siden for figuren/tabellen (ruled). Alternativt bruges "figure", som ikke skal have [1] og desuden skal caption flyttes manuelt, hvis caption skal være over hhv. under i figure-environmentet
+
+%%%%% figure environment
+\FloatBarrier
+\noindent
+\begin{figure}[htb]
+%\centering % centering kan tilføjes her (optional)
+\caption{The Danish Dual Diagnosis Field, version 1} % caption indstillinger er under preamble/macros
+\includegraphics[width=0.9\linewidth]{mainmatter/paper1/p1_data/imageX.png}
+\label{fig:x:1}
+\end{figure}
+\FloatBarrier
+
+%%%%% SCfigure environment
+\FloatBarrier
+\noindent
+\begin{SCfigure}[1][htb]
+\includegraphics[width=0.7\linewidth]{mainmatter/paper1/p1_data/imageX.png}
+\caption{Spørgsmål X: Filtreret på \enquote{=Ja eller <>Ja}}
+\label{fig:type:spørgsmål}
+\end{SCfigure}
+\FloatBarrier
+
+
+%%%%%%%%%% Indsæt tabel med tabular environment:
+
+    Også (1)+(2)+(3)
+    4) Tabeller refereres med \tref{tab:type:spørgsmål}. \tref = tabel reference
+
+\FloatBarrier
+\begin{table}[htb]
+\centering
+\caption{Spørgsmål X: Filtreret på \enquote{=Ja eller <>Ja}}
+\label{tab:krydstabulering:spørgsmål}
+\resizebox{\textwidth}{!}{% kan gøres inaktiv, hvis lille tabel
+\begin{tabular}{l|rr} % antal 'r' skal harmonere med antal kolonner. Hvis der er en "i alt"-kolonne, tilføj lodret streg "|r"
+           & Respondenter & Procent \\ \hline
+Ingen      & 0            & 0,0\%   \\ \hline
+Nogen svar & 159          & 29,2\%  \\ \hline
+Gennemført & 385          & 70,8\%  \\ \hline
+Frafaldet  & 0            & 0,0\%   \\ \hline
+I alt      & 544          & 100,0\%
+\end{tabular}
+} % kan gøres inaktiv hvis lille tabel
+\end{table}
+\FloatBarrier
+
+
+%%%%%%%%%% Indsæt tabel med tabularx+longtable = tablex environment:
+%%%%%%%%%% START TABLE %%%%%%%%%% REMEMBER TO CHANGE \multirow{n} to correspond with n number of columns
+\begingroup
+\def\arraystretch{1.0}%  Default: 1
+%\renewcommand\tabularxcolumn[1]{m{#1}} % vertical alignment in X cells
+\begin{tabularx}{\textwidth}{XX} % c centrerer teksten
+
+\caption{Kortlægning Af Teoretiske Distinktioner Til Begreber I Spørgeskema} \\
+
+
+%%%%% første side af tabellen
+
+\toprule
+
+    \textbf{Spørgeskema} & \textbf{Teori}
+    \\
+
+\midrule
+
+\endfirsthead % !
+
+
+%%%%%
+
+% multicolumn guide: {total antal columns}{justification}
+
+\multicolumn{2}{l}{{\footnotesize\bfseries \tablename\ \thetable} --- \textit{fortsat fra forrige side}.}
+\\
+
+% næste side af tabellen
+
+\midrule
+
+    \textbf{Spørgeskema} & \textbf{Teori}
+    \\
+
+\midrule
+
+\endhead % !
+
+
+%%%%%
+
+\midrule
+
+\multicolumn{2}{r}{\textit{fortsættes på næste side}...}
+\\
+
+\endfoot % !
+
+
+%%%%%
+
+\bottomrule
+
+\endlastfoot % !
+
+%%%%%
+
+% INDHOLDET
+
+    Moderne &   Design principles, Learnability \& Memorability
+    \\
+    
+    %\hline
+    
+    Brugbar & Utility
+    \\
+    
+    %\hline
+    
+    Relevant & Effectiveness
+    \\
+    
+    %\hline
+    
+    Besværlig & Efficiency
+
+\label{tab:mapping:theoretical}
+\end{tabularx}
+\endgroup
+\FloatBarrier
+%%%%%%%%%% END TABLE %%%%%%%%%%

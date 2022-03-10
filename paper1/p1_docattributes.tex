@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% START P1_DOCATTRIBUTES.tex %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% TITLE PAPER1
+%%%%%
+\title{Researching Organisational Imbrications and Interstices}
+\subtitle{A Qualitative Gaze on how Mundane Public Administration Works}
+\fulltitle{\thetitle: \theSubtitle} % the entire title to be edited in one place
+\headertitle{\theSubtitle}
+
+
+%%%%%%%%%% AUTHORS PAPER1
+%%%%%
+\makeatletter % requires 'keyval' package
+%
+\define@key{author1}{name}[Bagga Bjerge]{#1}
+\define@key{author1}{initialsname}[B.~Bjerge]{#1}
+\define@key{author1}{institution}[Center for Alcohol and Drug Research, Department of Psychology, Aarhus University, Denmark]{#1}
+\define@key{author1}{email}[\mailto{bb.crf@psy.au.dk}]{#1}
+\define@key{author1}{orcidID}[\theORCIDiDgreen{0000-0002-0942-0322}]{#1}
+%
+\define@key{author2}{name}[Tobias Georg Eule]{#1}
+\define@key{author2}{initialsname}[T.~Eule]{#1}
+\define@key{author2}{institution}[Department of Law, University of Bern, Switzerland]{#1}
+\define@key{author2}{email}[\mailto{tobias.eule@oefre.unibe.ch}]{#1}
+\define@key{author2}{orcidID}[\theORCIDiDgreen{0000-0002-6973-2715}]{#1}
+%
+\define@key{author3}{name}[Kasper Trolle Elmholdt]{#1}
+\define@key{author3}{initialsname}[K.~Elmholdt]{#1}
+\define@key{author3}{institution}[Department of Political Science, Aalborg University, Denmark]{#1}
+\define@key{author3}{email}[\mailto{elm@dps.aau.dk}]{#1}
+\define@key{author3}{orcidID}[\theORCIDiDgreen{0000-0002-0325-5266}]{#1}
+%%%%%
+%
+\makeatother
+%
+%#########
+
+
+%%%%%%%%%% Print Author
+%%%%%
+\author{\protect\setkeys{author1}{name}$^{1}$~\protect\setkeys{author1}{orcidID}
+\and
+\protect\setkeys{author2}{name}$^{2}$~\protect\setkeys{author2}{orcidID}
+\and
+\protect\setkeys{author3}{name}$^{3}$~\protect\setkeys{author3}{orcidID}
+%
+\smallskip
+%
+\footnotesize{
+\\$^{1}$\emph{\protect\setkeys{author1}{institution}}
+\\$^{2}$\emph{\protect\setkeys{author2}{institution}} 
+\\$^{3}$\emph{\protect\setkeys{author3}{institution}}
+\\$^{1}${\protect\setkeys{author1}{email}}%
+\quad$^{2}${\protect\setkeys{author2}{email}}%
+\quad$^{3}${\protect\setkeys{author3}{email}}%
+}}
+%####
+%#########
+
+
+%#######################################################
+%############# END P1_DOCATTRIBUTES.tex #################
+%#######################################################

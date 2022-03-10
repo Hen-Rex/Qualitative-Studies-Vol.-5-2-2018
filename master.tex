@@ -1,0 +1,129 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% START MASTER.tex %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% THIS DOCUMENT WAS TYPESET IN LATEX ON OVERLEAF BY HENRIK PLØGER STOUGAARD NIELSEN OF AALBORG UNIVERSITY. CONTACT ME ON hpsn17@student.aau.dk IF NECESSARY.
+%
+% THIS DOCUMENT USES THE FOLLOWING COMPILATION SETTINGS TO WORK:
+%   COMPILER: LuaLaTeX
+%   MAIN DOCUMENT: master.tex
+%
+% BEFORE HANDING IN FINAL DRAFT:
+%   Write 'final' in place of 'draft' in '\documentclass'.
+%   Remove [showframe] in the \geometry package. It is to see margins drawn out.
+%   Compile at least 5 times to make document look nice.
+%
+% Husk at ændre i headers i alle pagestyles (lige/ulige sider), så antal forfattere passer.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT SETUP & LAYOUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,a4paper,article,openany,openbib,twoside,final]{memoir}
+    % final can be replaced by draft to speed up compilation time, shows placeholders.
+    % remember, that hyperref is not loaded in draft mode, so URLs don't work.
+
+\usepackage[]{geometry} % SKAL KOMME FØR setlrmarginsadnblock og FØR \checkandfixthelayout. Package option: [showframe], som viser marginerne afmærket.
+%
+\usepackage{marginnote} % marginnotes that do not run off page
+    \renewcommand*{\marginfont}{\sffamily\tiny\bfseries\color{red}}
+%
+\setlrmarginsandblock{20mm}{20mm}{*} % Margins {inner}{outer}
+\setulmarginsandblock{20mm}{20mm}{*} % Margins {top}{bottom}
+\checkandfixthelayout % Must come last after all design changes
+\setheaderspaces{*}{9mm}{*} % sets spacing between header line and text
+    \newcommand*{\titlepagevspace}{+20mm}
+%\raggedbottomsection % fix layout, instead of raggedbottom
+%
+\SingleSpacing % line-spacing, alternatively \SingleSpacing
+
+%% PAGESTYLE & CHAPTERSTYLE. Also defines both header and footer. See Memoir documentation, p. 116b.
+%\pagestyle{ruled} % has been defined in macros. Pagestyle{plain} has been redefined in macros as well.
+%
+%% Eksempler på chapterstyles pp. 383--
+\chapterstyle{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LOADING PACKAGES & DOCUMENT ATTRIBUTES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% package inclusion and set up of the document
+\usepackage{setup/preamble}
+
+%% macros
+\usepackage{setup/macros}
+
+%% docattributes
+\usepackage{setup/main.docattributes}
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frontmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter
+
+%\input{_editorialNotes.tex} % to be commented out before publishing
+
+%\tableofcontents* % to be commented out before publishing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mainmatter % note that mainmatter forces \cleardoublepage
+
+    \pagenumbering{arabic}
+    \setcounter{page}{49} % set starting page number of first page here!
+
+%%%%% Editorial (BaggaTobiasKasper)
+    \label{firstpage.P1}
+\includepaper{paper1/p1_master} % [+Henrik][+Kasper][+authors.1][+rev.1][+authors.2][+rev.2][+approval][=final]
+    \clearpage
+
+    \pagenumbering{fnsymbol}\pagenumbering{arabic}
+    
+%%%%% Paper 2 (MajBaggaJeppe)
+    \label{firstpage.P2}
+\includepaper{paper2/p2_master} % [+Henrik][+Kasper][+authors.1][+rev.1][+authors.2][+rev.2][+approval][=final]
+    \clearpage
+    
+    \pagenumbering{fnsymbol}\pagenumbering{arabic}
+    
+%%%%% Paper 3 (MarieMøller)
+    \label{firstpage.P3}
+\includepaper{paper3/p3_master} % [+Henrik][+Kasper][+authors.1][+rev.1][+authors.2][+rev.2][+approval][=final]
+    \clearpage
+
+    \pagenumbering{fnsymbol}\pagenumbering{arabic}
+    
+%%%%% Paper 4 (LisaBorrelli)
+    \label{firstpage.P4}
+\includepaper{paper4/p4_master} % [+Henrik][+Kasper][+authors.1][+rev.1][+authors.2][+rev.2][+approval][=final]
+    \clearpage
+
+    \pagenumbering{fnsymbol}\pagenumbering{arabic}
+    
+%%%%% Paper 5 (SamuelMorag)
+    \label{firstpage.P5}
+\includepaper{paper5/p5_master} % [+Henrik][+Kasper][-authors.1][+rev.1][+authors.2][+rev.2][+approval][=final]
+    \clearpage
+
+    \pagenumbering{fnsymbol}\pagenumbering{arabic}
+    
+%%%%% Paper 6 (KatrineJohansen)
+    \label{firstpage.P6}
+\includepaper{paper6/p6_master} % [+Henrik][+Kasper][+authors.1][+rev.1][+authors.2][+rev.2][+approval][=final]
+    \clearpage
+
+
+
+
+%#######################################################
+%################# END MASTER.TEX ######################
+%#######################################################
+\end{document}

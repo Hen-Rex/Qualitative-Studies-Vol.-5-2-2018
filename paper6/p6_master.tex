@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% START PAPER1MASTER.tex %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% document and author information
+\input{paper6/p6_docattributes.tex}
+
+%%%%%%%%%%
+    \vspace*{\titlepagevspace}
+\input{paper6/0a_titlepage.tex}
+
+\input{paper6/0b_abstract}
+
+%    \begin{multicols}{2} % original position, used inside document itself. begin{multicols} is found inside 'article.tex'. It's a hack, but it works.
+
+\input{paper6/1_article.tex}
+
+    \medskip
+
+    {\footnotesize
+    \begin{SingleSpace}
+
+\input{paper6/2_acknowledgements.tex}
+
+\input{paper6/3_endnotes.tex}
+
+\input{paper6/4_references.tex}
+    \fadebreak{}
+\input{paper6/5_biography.tex}
+
+    \end{SingleSpace}}
+    \end{multicols}
+
+%\input{paper6/6_appendix1.tex}
+
+
+%%%%%%%%%%%%%%%%%%
+%\nocite{*} % fylder bibliografien uden direkte citation i dokumentet
+%    \begin{SingleSpace}
+%\thispdfpagelabel{Paper 6: References}
+%\printbibliography[segment=\therefsegment,heading=subbibliography]
+%\label{paper6:references}
+%    \end{SingleSpace}
+%#######################################################
+%################# END PAPER1.tex ######################
+%#######################################################

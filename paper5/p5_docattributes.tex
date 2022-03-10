@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% START P5_DOCATTRIBUTES.tex %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% TITLE PAPER1
+%%%%%
+\title{Assembling Advice}
+\subtitle{Ethnographic Explorations of the Changing Relationship Between Voluntary Advice Services and the Welfare State}
+\fulltitle{\thetitle:\\\theSubtitle} % the entire title to be edited in one place
+\headertitle{Ethnographic Explorations of the Changing Relationship Between Volu\textellipsis} % title too long, must be cut off in document headers
+
+%%%%%%%%%% AUTHORS PAPER1
+%%%%%
+\makeatletter % requires 'keyval' package
+%
+\define@key{author1}{name}[Morag McDermont]{#1}
+\define@key{author1}{initialsname}[M.~McDermont]{#1}
+\define@key{author1}{title}[]{#1}
+\define@key{author1}{institution}[University of Bristol Law School, University of Bristol, U.K.]{#1}
+\define@key{author1}{email}[\mailto{morag.mcdermont@bristol.ac.uk}]{#1}
+\define@key{author1}{orcidID}[\theORCIDiDgreen{}]{#1}
+%
+\define@key{author2}{name}[Samuel Kirwan]{#1}
+\define@key{author2}{initialsname}[S.~Kirwan]{#1}
+\define@key{author2}{title}[]{#1}
+\define@key{author2}{institution}[The School for Policy Studies, University of Bristol, U.K.]{#1}
+\define@key{author2}{email}[\mailto{samuel.kirwan@bristol.ac.uk}]{#1}
+\define@key{author2}{orcidID}[\theORCIDiDgreen{}]{#1}
+
+%%%%%
+%
+\makeatother
+%
+%#########
+
+
+%%%%%%%%%% Print Author
+%%%%%
+\author{\protect\setkeys{author1}{name}$^{1}$%~\protect\setkeys{author1}{orcidID}
+\and
+\protect\setkeys{author2}{name}$^{2}$%~\protect\setkeys{author2}{orcidID}
+%
+\smallskip
+%
+\footnotesize{
+\\$^{1}$\emph{\protect\setkeys{author1}{institution}}
+\\$^{2}$\emph{\protect\setkeys{author2}{institution}} \\$^{1}${\protect\setkeys{author1}{email}}%
+\quad$^{2}${\protect\setkeys{author2}{email}}%
+}}
+%####
+%#########
+
+
+%#######################################################
+%############# END P5_DOCATTRIBUTES.tex #################
+%#######################################################

@@ -1,0 +1,579 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% START MACROS.tex %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%% DEFINE FULLTITLE COMMAND %%%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\newcommand{\fulltitle}[1]{
+  \begingroup
+    \let\footnote\@gobble\gdef\@fulltitle{#1}
+    \protected@xdef\theFulltitle{#1}
+  \endgroup}
+\makeatother
+%####
+%########### END DEFINE FULLTITLE COMMAND #############
+
+
+%%%%%%%%%%%% DEFINE SUBTITLE & \THESUBTITLE COMMAND %%%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\newcommand{\subtitle}[1]{
+  \begingroup
+    \let\footnote\@gobble\gdef\@subtitle{#1}
+    \protected@xdef\theSubtitle{#1}
+  \endgroup}
+\makeatother
+%####
+%########### END DEFINE SUBTITLE & \THESUBTITLE COMMAND #############
+
+
+%%%%%%%%%%%% DEFINE HEADERTITLE AND THEHEADERTITLE COMMAND %%%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\newcommand{\headertitle}[1]{
+  \begingroup
+    \let\footnote\@gobble\gdef\@headertitle{#1}
+    \protected@xdef\theHeadertitle{#1}
+  \endgroup}
+\makeatother
+%####
+%########### END DEFINE HEADERTITLE AND THEHEADERTITLE COMMAND #############
+
+
+%%%%%%%%%%%% DEFINE MAILTO COMMAND %%%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\newcommand*{\mailto}{\begingroup\@makeother\#\@mailtolink}
+\newcommand*{\@mailtolink}[1]{\href{mailto:#1}{#1}\endgroup} 
+\makeatother
+%####
+%########### END DEFINE MAILTO COMMAND #############
+
+
+%%%%%%%%%%%%%%%% TITLE FONT SIZES %%%%%%%%%%%%%%%
+%%%%%
+\renewcommand*{\chaptitlefont}{\bfseries\large}
+    \renewcommand*{\secheadstyle}{\bfseries\normalsize}
+    \renewcommand*{\subsecheadstyle}{\bfseries\normalsize}
+    \renewcommand*{\subsubsecheadstyle}{\bfseries\normalsize}
+    \renewcommand*{\paraheadstyle}{\bfseries\normalsize}
+    \renewcommand*{\subparaheadstyle}{\bfseries\normalsize}
+% NOTE! Distance CANNOT be smaller than baselineskip; in that case please subtract -\baselineskip from the distance
+\setlength{\beforechapskip}{1.6\baselineskip -\baselineskip} % evt. brug "addtolength{-N} i stedet.
+    \setlength{\afterchapskip}{1.1\baselineskip -\baselineskip} % evt. brug "addtolength{-N} i stedet
+    \setbeforesecskip{-0.30\onelineskip plus -0.15\onelineskip} % +N space before, -N space before + no indent after
+    \setaftersecskip{0.05\onelineskip} % vertical space +N, horizontal space -N
+    \setbeforesubsecskip{-0.30\onelineskip plus -0.15\onelineskip} % +N space before, -N space before + no indent after
+    \setaftersubsecskip{0.05\onelineskip} % vertical space +N, horizontal space -N
+    \setbeforesubsubsecskip{-0.20\onelineskip plus -0.10\onelineskip} % +N space before, -N space before + no indent after
+    \setaftersubsubsecskip{-1em} % vertical space +N, horizontal space -N
+    \setbeforeparaskip{-0.20\onelineskip} % +N space before, -N space before + no indent after
+    \setafterparaskip{-1em} % vertical space +N, horizontal space -N
+    \setbeforesubparaskip{-0.10\onelineskip} % +N space before, -N space before + no indent after
+    \setaftersubparaskip{-1em} % vertical space +N, horizontal space -N
+\setlength{\parskip}{0em plus 0em}
+%####
+%############# END TITLE FONT SIZES ############    
+
+
+%%%%%%%%%%%%%%%% ENDNOTE SETUP %%%%%%%%%%%%%%%
+%%%%%
+\makepagenote % converts all footnotes into endnotes, use \pagenote command
+%    \continuousnotenums % continuous numbering, not per chapter
+%    \notepageref % shows page back-refs
+    \renewcommand*{\notedivision}{\section*{Endnotes}} % just Notes heading (no Chapter)
+    \renewcommand*{\pagenotesubhead}[3]{} % no subheads in the Notes
+%
+\newcommand\resetPagenotes{
+  \setcounter{pagenote}{0}
+}
+%####
+%############# END ENDNOTE SETUP ############
+
+
+%%%%%%%%%%%%%%%% SPECIAL BIBLIOGRAPY SETUP, JOURNAL %%%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\renewcommand{\bibsection}{%
+   \section*{References}
+   \prebibhook}
+\renewcommand\@biblabel[1]{} % suppress ref. numbering
+%
+\renewcommand*{\biblistextra}{%
+   \setlength{\leftmargin}{\parindent}
+   \setlength{\itemindent}{-\parindent}} % removes indent of first line
+\makeatother
+%####
+%############# END SPECIAL BIBLIOGRAPY SETUP, JOURNAL ############
+
+
+%%%%%%%%%%%%%%%% \MARGINNOTE IN TWO-COLUMN MODE %%%%%%%%%%%%%%%
+%%%%%
+\let\oldmarginnote\marginnote
+\strictpagecheck
+\renewcommand{\marginnote}[1]
+  {%
+    \checkoddpage%
+    \ifoddpage%
+      {\begingroup\docolaction{\reversemarginpar}{}{}\oldmarginnote{#1}\endgroup}%
+    \else{%
+      {\begingroup\docolaction{}{}{\reversemarginpar}\oldmarginnote{#1}\endgroup}}%
+    \fi%
+  }
+%####
+%############# END \MARGINNOTE IN TWO-COLUMN MODE ############
+
+
+%%%%%%%%%%%% REDEFINE \mainmatter TO CONTINUOUS PAGE NUMBERING %%%%%%%%%%%%%%
+%%%%%
+\let\mainmatterORIGINAL\mainmatter
+\renewcommand\mainmatter
+    {\edef\temppagenumber{\arabic{page}}%
+    \mainmatterORIGINAL
+    \setcounter{page}{\temppagenumber}%
+    }
+%####
+%########## END REDEFINE \mainmatter to CONTINUOUS PAGE NUMBERING #########
+    
+    
+%%%%%%%%%%%%%%%% HEADERS & FOOTERS REDEFINITION %%%%%%%%%%%%%%%
+%%%%%
+\aliaspagestyle{part}{empty} % \aliaspagestyle skal komme først i denne sektion, for at aktivere ændringer. {alias}{original}
+%
+%\setlength{\headheight}{25pt} % header height. enskip = 0.5em, enspace is a kern of 0.5em. quad=1em, qquad=2em
+%%%%%%%%%%
+%%%%% FRONT PAGES - dette er til forsiderne, skal angives både for odd og even pages.
+%%
+\makepagestyle{P1.plain}
+    \makeevenhead{P1.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPI\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeoddhead{P1.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPI\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeevenfoot{P1.plain}{}{\thepage}{}
+    \makeoddfoot{P1.plain}{}{\thepage}{}
+    %\makeheadrule{P1.plain}{\textwidth}{\normalrulethickness}
+    %\makefootrule{P1.plain}{\textwidth}{\normalrulethickness}{0pt}
+%
+\copypagestyle{P2.plain}{P1.plain} % \aliaspagestyle skal komme først
+    \makeevenhead{P2.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPII\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeoddhead{P2.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPII\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+%
+\copypagestyle{P3.plain}{P1.plain} % \aliaspagestyle skal komme først
+    \makeevenhead{P3.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPIII\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeoddhead{P3.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPIII\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+%
+\copypagestyle{P4.plain}{P1.plain} % \aliaspagestyle skal komme først
+    \makeevenhead{P4.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPIV\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeoddhead{P4.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPIV\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+%
+\copypagestyle{P5.plain}{P1.plain} % \aliaspagestyle skal komme først
+    \makeevenhead{P5.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPV\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeoddhead{P5.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPV\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+%
+\copypagestyle{P6.plain}{P1.plain} % \aliaspagestyle skal komme først
+    \makeevenhead{P6.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPVI\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+    \makeoddhead{P6.plain}{\includegraphics[height=10mm,width=75mm,keepaspectratio]{main_data/QS_logo-oneliner-600dpi.png}\\\theCopyright \enskip Vol.~\theVolume, No.~\theIssue, \thePagesPVI\\\theISSN}{}{\includegraphics[height=15mm,keepaspectratio]{main_data/QS_logo-origami-1200dpi.png}}
+%%%%%%%%%%
+%%%%% NORMAL HEADERS - de normale sider, alt andet end forsiderne
+%%
+\makepagestyle{P1} % headers Paper1
+    \makeevenhead{P1}{\thepage}{}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}, \protect\setkeys{author2}{initialsname}, and \protect\setkeys{author3}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}
+    \makeoddhead{P1}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}, \protect\setkeys{author2}{initialsname}, and \protect\setkeys{author3}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}{}{\thepage}
+    \makeevenfoot{P1}{}{}{}
+    \makeoddfoot{P1}{}{}{}
+    \makeheadrule{P1}{\textwidth}{\normalrulethickness}
+    %\makefootrule{P1}{\textwidth}{\normalrulethickness}{0pt}
+%
+\copypagestyle{P2}{P1} % headers Paper2
+    \makeevenhead{P2}{\thepage}{}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}, \protect\setkeys{author2}{initialsname}, and \protect\setkeys{author3}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}
+    \makeoddhead{P2}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}, \protect\setkeys{author2}{initialsname}, and \protect\setkeys{author3}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}{}{\thepage}
+%
+\copypagestyle{P3}{P1} % headers Paper3
+    \makeevenhead{P3}{\thepage}{}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}
+    \makeoddhead{P3}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}{}{\thepage}
+%
+\copypagestyle{P4}{P1} % headers Paper4
+    \makeevenhead{P4}{\thepage}{}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}
+    \makeoddhead{P4}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}{}{\thepage}
+%
+\copypagestyle{P5}{P1} % headers Paper5
+    \makeevenhead{P5}{\thepage}{}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname} and \protect\setkeys{author2}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}
+    \makeoddhead{P5}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname} and \protect\setkeys{author2}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}{}{\thepage}
+%
+\copypagestyle{P6}{P1} % headers Paper6
+    \makeevenhead{P6}{\thepage}{}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}
+    \makeoddhead{P6}{{\footnotesize\textbf{\protect\setkeys{author1}{initialsname}:} {\itshape\theHeadertitle}\quad\theCopyright}}{}{\thepage}
+%
+\makepagestyle{chapter} % for all first recto chapter pages.
+\makeevenhead{chapter}{!!!!!!!!!!}{---THIS PAGE INSERTED FOR EDITORIAL REASONS. TO BE REMOVED---}{!!!!!!!!!!}
+\makeoddhead{chapter}{!!!!!!!!!!}{---THIS PAGE INSERTED FOR EDITORIAL REASONS. TO BE REMOVED---}{!!!!!!!!!!}
+\makeevenfoot{chapter}{!!!!!!!!!!}{---THIS PAGE INSERTED FOR EDITORIAL REASONS. TO BE REMOVED---}{!!!!!!!!!!}
+\makeoddfoot{chapter}{!!!!!!!!!!}{---THIS PAGE INSERTED FOR EDITORIAL REASONS. TO BE REMOVED---}{!!!!!!!!!!}
+\makeheadrule{chapter}{\textwidth}{\normalrulethickness}
+\makefootrule{chapter}{\textwidth}{\normalrulethickness}{0pt}
+%####
+%############# END HEADERS & FOOTERS REDEFINITION ############
+
+
+%%%%%%%%%%%%%%%%% FIX TRIMMARKS IN pdflscape %%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\newcommand*{\gmshow@textheight}{\textheight}
+\newdimen\gmshow@@textheight
+\g@addto@macro\landscape{%
+  \gmshow@@textheight=\hsize
+  \renewcommand*{\gmshow@textheight}{\gmshow@@textheight}%
+}
+\def\Gm@vrule{%
+  \vrule width 0.2pt height\gmshow@textheight depth\z@
+}%
+\makeatother
+%####
+%############# END FIX TRIMMARKS IN pdflscape ###############
+
+
+%%%%%%%%%%%%% DEFINE \starbreak (USING \fancybreak) %%%%%%%%%%%%%%%
+%%%%%
+\newcommand{\starbreak}{%
+    \fancybreak{$\ast$ ~$\ast$ ~$\ast$}%
+}
+\newcommand{\fadebreak}{%
+    \noindent\makebox[\linewidth]{\resizebox{0.90\linewidth}{1pt}{$\bullet$}}\bigskip
+}
+%####
+%############ END DEFINE \starbreak (USING \fancybreak) ##########
+
+
+%%%%%%%%%%%%% SHOW ToC, LoF, LoT IN PDF INDEX %%%%%%%%%%%%%%%
+%%%%%
+\makeatletter % requires package \usepackage{etoolbox}
+\pretocmd{\tableofcontents}{%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \pdfbookmark[0]{\contentsname}{toc}%
+}{}{}%
+\makeatother
+%####
+%############ END DEFINE SHOW ToC, LoF, LoT IN PDF INDEX ##########
+
+
+%%%%%%%%%%%%%%%% MAKES {part} INTO VERSALER IN ToC + ToC SPACING %%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\settocpreprocessor{part}{% makes part versaler in ToC
+    \let\tempf@rtoc\f@rtoc%
+    \def\f@rtoc{%
+        \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+}
+%
+%\settocpreprocessor{chapter}{% makes chapter versaler in ToC
+%    \let\tempf@rtoc\f@rtoc%
+%    \def\f@rtoc{%
+%        \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@r%toc}}%
+%}
+\makeatother
+%
+\renewcommand\partnumberlinebox[2]{#2\quad} % <-- Adds 1em whitespace between part number and title
+%
+%####
+%########### END MAKES {part} INTO CAPITALS IN ToC + ToC SPACING ############
+
+
+%%%%%%%%%%%%%%%% MAKES {\frontmatter} INTO ITALICS IN ToC %%%%%%%%%%%%%%
+%%%%%
+\makeatletter % FONT IN TOC (frontmatter, chapters)
+\let\oldcftchapterfont\cftchapterfont % Save ToC chapter entry font
+\let\oldcftchapterpagefont\cftchapterpagefont %
+\g@addto@macro\frontmatter{%
+  \addtocontents{toc}{% Update chapter entry font
+    \protect\g@addto@macro\protect\cftchapterfont{\protect\normalfont\itshape}%
+    \protect\g@addto@macro\protect\cftchapterpagefont{\protect\normalfont}%
+    \setlength{\cftbeforechapterskip}{0em \@plus 0em} % changed definition
+  }%
+}
+\g@addto@macro\mainmatter{%
+  \addtocontents{toc}{% Restore chapter entry font
+    \let\protect\cftchapterfont\protect\oldcftchapterfont%
+    \let\protect\cftchapterpagefont\protect\oldcftchapterpagefont%
+    \setlength{\cftbeforechapterskip}{1.0em \@plus\p@} % standard definition
+  }%
+}
+\makeatother
+%
+\makeatletter % FONT IN TOC (frontmatter, sections)
+\let\oldcftsectionfont\cftsectionfont% Save ToC section entry font
+\g@addto@macro\frontmatter{%
+  \addtocontents{toc}{% Update section entry font
+    \protect\g@addto@macro\protect\cftsectionfont{\protect\normalfont\itshape}%
+  }%
+}
+\g@addto@macro\mainmatter{%
+  \addtocontents{toc}{% Restore section entry font
+    \let\protect\cftsectionfont\protect\oldcftsectionfont%
+  }%
+}
+\makeatother
+%####
+%########### END MAKES {\frontmatter} INTO ITALICS IN ToC ############
+
+
+%%%%%%%%%%%%% SECTION NUMBERING + SecDepth + ToC Depth %%%%%%%%%%%%%%
+%%%%% to have <secnumdepth> and above numbered
+\setsecnumdepth{none}
+%\setsecnumdepth{part}
+%\setsecnumdepth{chapter}
+%\setsecnumdepth{section}
+%\setsecnumdepth{subsection}
+%\setsecnumdepth{subsubsection}
+%\setsecnumdepth{paragraph}
+%\setsecnumdepth{subparagraph}
+%
+\settocdepth{chapter} % 'settocdepth' lav samme som ovenstående 'secnumdepth'
+%####
+%######## END SECTION NUMBERING #########
+
+
+%%%%%%%%%%%%% COUNTERS RESETTING WHENEVER \includepaper IS USED TO INCLUDE PART PAPER OF THESIS %%%%%%%%%%%%%%
+%%%%%
+\newcommand{\includepaper}[1]{
+    \setcounter{enumi}{0} % nummererede lister i 4 niveauer nulstilles.
+    \setcounter{enumii}{0}
+    \setcounter{enumiii}{0}
+    \setcounter{enumiv}{0}
+    \setcounter{parentequation}{0}
+    \setcounter{equation}{0}
+    \setcounter{figure}{0}
+    \setcounter{subfigure}{0}
+    \setcounter{footnote}{0}
+    \setcounter{mpfootnote}{0}
+%    \setcounter{lofdepth}{1}
+%    \setcounter{lotdepth}{1}
+    \setcounter{paragraph}{0}
+    \setcounter{subparagraph}{0}
+%    \setcounter{part}{0}
+    \setcounter{chapter}{0}
+    \setcounter{section}{0}
+    \setcounter{subsection}{0}
+    \setcounter{subsubsection}{0}
+    \setcounter{table}{0}
+    \setcounter{subtable}{0}
+    \input{#1} % \include does \clearpage before after and \input does not.
+    }
+%####
+%######## END COUNTERS RESETTING WHENEVER \includepaper IS USED TO INCLUDE PART PAPER OF THESIS #########
+
+
+%%%%%%%%%%%%%%%% {part} BLANK SIDE COLOR %%%%%%%%%%%%%%
+%%%%%
+\makeatletter
+\renewcommand\@endpart{\vfil\newpage
+    \pagecolor{aaugreen}   %%% Added line here
+    \if@twoside
+        \if@openright
+        \null
+        \thispagestyle{empty}%
+        \newpage
+        \fi
+    \fi
+    \if@tempswa
+        \twocolumn
+    \fi}
+\makeatother
+%####
+%########### END {part} BLANK SIDE COLOR ############
+
+
+%%%%%%%%%%%%% CHANGE FIGURE, TABLE, EQUATION ENUMERATION %%%%%%%%%%%%%%
+%%%%%
+    \makeatletter
+\renewcommand\@memmain@floats{%
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter} % Nulstiller counter ved specified \divider
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand{\thetable}{\thechapter.\arabic{table}}}
+    \makeatother
+\counterwithin{equation}{subsection}
+\renewcommand{\theequation}{\thesubsection \alph{equation}} % ændrer layout
+% Change caption layout under preamble "captionsetup"
+%####
+%############ END CHANGE FIGURE, TABLE, EQUATION ENUMERATION ############
+
+
+%%%%%%%%%%%%%%%% OPSÆTNING BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%
+%%%%%
+    \begin{comment}
+\setcounter{abbrvpenalty}{0} % This counter, which is used by the localisation modules, holds the penalty used in short or abbreviated localisation strings. For example, a linebreak in expressions such as “et al.” or “ed. by” is unfortunate, but should still be possible to prevent overfull boxes. This counter is initialized to \hyphenpenalty at load-time. The idea is making TeX treat the whole expression as if it were a single, hyphenatable word as far as line-breaking is concerned. If you dislike such linebreaks, use a higher value. If you do not mind them at all, set this counter to 0. Disable: 10000 or higher.
+%\\\\\\   DELETE WHEN COMMANDS ARE NEEDED  
+    %\setcounter{highnamepenalty}{10000} % This counter holds a penalty affecting line-breaking in names. Please refer to §§ 3.14.4 and 3.11.1 for explanation. The counter is initialized to \hyphenpenalty at load-time. Use a higher value if you dislike the respective linebreaks. If you do not mind them at all, set this counter to 0. Default: 10000 or higher (no linebreaks at highnamepenalty breakpoints). The penalty used is by \addhighpenspace and \addhpthinspace, see § 4.7.4 for details
+%\\\\\\ DELETE WHEN COMMANDS ARE NEEDED
+    %\setcounter{lownamepenalty}{} % Similar to highnamepenalty. This delimiter is inserted between all name parts where \bibnamedelimc does not apply. The default definition is an interword space penalized by the value of the lownamepenalty counter (§ 3.11.4). Please refer to § 3.14.4 for further details. The counter is initialized to half the \hyphenpenalty at load-time. Use a higher value if you dislike the respective linebreaks. If you do not mind them at all, set this counter to 0. The penalty used by \addlowpenspace and \addlpthinspace, see § 4.7.4 for details.
+\setcounter{biburlnumpenalty}{9000} % If this counter is set to a value greater than zero, biblatex will permit linebreaks after numbers in all strings formatted with the \url command from the url package. This will affect urls and doi's in the bibliography. The breakpoints will be penalized by the value of this counter. If urls and/or dois in the bibliography run into the margin, try setting this counter to a value greater than >0 but less than <10000 (you normally want to use a high value like 9000). Default/Disable: 0.
+\setcounter{biburllcpenalty}{100} % Similar to biburlnumpenalty, except that it will add a breakpoint after all lowercase letters. Default: very low. Disable: 0.
+\setcounter{biburlucpenalty}{100} % Similar to biburlnumpenalty, except that it will add a breakpoint after all uppercase letters. Default: very low. Disable: 0.
+%%%%%
+\setlength{\bibhang}{\parindent} % The hanging indentation of the bibliography, if applicable. This length is initialized to \parindent at load time. If \parindent is zero length for some reason, \bibhang will default to 1em.
+\setlength{\biblabelsep}{\labelsep} % The HORIZONTAL space between entries and their corresponding labels (IF ANY, e.g. [1]<>Name ). Bibliography styles which use list environments and print a label should set \labelsep to \biblabelsep in the definition of the respective environment.
+\setlength{\bibparsep}{0em} % The vertical space between paragraphs within an entry in the bibliography. Bibliography styles using list environments should set \parsep to \bibparsep in the definition of the respective environment. Default: 0.
+\setlength{\bibitemsep}{\parsep} % The vertical space between the individual entries in the bibliography. Bibliography styles using list environments should set \itemsep to \bibitemsep in the definition of the respective environment. Default: 0em.
+\setlength{\bibnamesep}{0em} % Vertical space to be inserted between two entries in the bibliography whenever an entry starts with a name which is different from the initial name of the previous entry. Default: 0em. Setting this length to a positive value greater than \bibitemsep will GROUP THE BIBLIOGRAPHY BY AUTHOR/EDITOR NAME. Note that \bibitemsep, \bibnamesep, and \bibinitsep obey the rules for \addvspace, that is, when vertical space introduced by any of these commands immediately follows on from space introduced by another of them, the resulting total space is equal to the largest of them.
+\setlength{\bibinitsep}{0em} % Vertical space to be inserted between two entries in the bibliography whenever an entry starts with a letter which is different from the initial letter of the previous entry. Default: 0em. Setting this length to a positive value greater than \bibitemsep will GROUP THE BIBLIOGRAPHY ALPHABETICALLY. Note that \bibitemsep, \bibnamesep, and \bibinitsep obey the rules for \addvspace, that is, when vertical space introduced by any of these commands immediately follows on from space introduced by another of them, the resulting total space is equal to the largest of them.
+    \end{comment}
+%####
+%############### END OPSÆTNING BIBLIOGRAPHY ###################
+
+
+%%%%%%%%%%%%% OPSÆTNING csquotes & citations OPSÆTNING START %%%%%%%%%%%%%%%%
+%
+%% csquotes ændres til emphasized so that inner quotes are non-italicized inside another italicized quote. Brug af citationer csquotes: http://mirrors.dotsrc.org/ctan/macros/latex/contrib/biblatex/doc/biblatex.pdf, side 95 og frem er der metoder, man kan bruge.
+%
+%   På Dansk:       ([{<«||»>}]) og " ' » > (kur–[versaler]–siv) < « ' "
+%   Andre sprog:    ([{<«||»>}]) og « " ' < (kur–[versaler]–siv) > ' " »
+%
+%% LEGEND OF USE csquotes BELOW:
+%
+%%   \cite[<pages>]{<referencekey>} = forfatter, år (ingen parenteser)
+%%   \cites = (for metode, se \parencites længere nede)
+%%   \cite*[<pages>]{<referencekey>} = kun år (ender også i bibliografien)
+%%   \cites* = (for metode, se \parencites længere nede)
+%%   alternativt \citeyear[<pages>]{<referencekey>} og \citeauthor[<pages>]{<referencekey>}
+%%   parencite[<pages>]{<referencekey>} = samme som \cite, men med parenteser
+%%   parencite*[<pages>]{<referencekey>} = samme som \cite*
+%%   \parencites(Sammenlign)(løs oversættelse)[15]{MonitorDeloitte} = Sammenlign med Monitor Deloitte, 2017, s. 15, løs oversættelse.
+%%   \footcite + \footcites, samme metode.
+%
+%%  Use of any \quote can be combined with \cite — however, not enquote)
+%
+%%   \begin{quote}...\end{quote} = indrykker marginer hver side, ikke-kursiveret
+%%   \blockquote[{\cite{<referencekey>}]{...} = bemærk 2 stk [[]]. Hvis antallet af linjer overstiges, så vil den automatisk lave en indenteret quote. Ellers er det i samme linje som øvrig tekst.
+%
+%%  \textquote[<pages>]{...} = Kan bruges inden i en blockquote. En textquote kan ikke bruges inden i en anden textquote.
+%%   \enquote{...} = kan ikke bruges med []. Simpel. Kan bruges inderst i nesting af flere quotes inden i hinanden.
+%
+%% Der er bl.a. også \volsite m.fl. Se dokumentationen.
+%
+%%%%%
+\let\oldenquote\enquote
+    \renewcommand{\enquote}[1]{{\emph{\oldenquote{#1}}}}
+%
+\let\oldtextquote\textquote
+    \renewcommand{\textquote}[1]{{\emph{\oldtextquote{#1}}}}
+%
+\SetBlockThreshold{0} % enables blockquote at 0 line(s) (1 word)
+%
+\renewenvironment{quote}{%
+   \list{}{%
+    \leftmargin2.5em   % this is the adjusting screw
+    \rightmargin1.0em
+   }
+   \item\relax
+}
+{\endlist}
+%####
+%############## END csquotes and citations OPSÆTNING ##############
+
+
+%%%%%%%%%%%%%% DEFINITION OF FIXED LATEX NAME LABELS %%%%%%%%%%%%%%%
+%%%%%
+\addto\captionsdanish{%
+  \renewcommand{\abstractname}{Abstract}} % Ellers hedder det 'Resume' på dansk.
+%
+    \begin{comment}
+\defbibheading{subbibliography}[\refname]{% this changes subbibliography to chapter* instead of section* in the ToC
+\chapter*{#1}%
+\thispagestyle{chapter} % normalt sat til 'ruled'
+\markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}%
+\addcontentsline{toc}{chapter}{#1}}
+    \end{comment}
+%####
+%########## END DEFINITION OF FIXED LATEX NAME LABELS #############
+
+
+%%%%%%%%%%%%%%%%% START APPENDICES ToC %%%%%%%%%%%%%%%%%
+%%%%% these commands break the pdf index in pdf readers!!!
+\renewcommand\mempostaddapppagetotochook{
+    \cftinserthook{toc}{BREAK}}
+    \cftinsertcode{BREAK}{\changetocdepth{-10}}
+    \let\normalchangetocdepth\changetocdepth
+\makeatletter
+\newcommand\appendixtableofcontents{
+    \begingroup
+    \let\changetocdepth\@gobble
+    \normalchangetocdepth{-10}
+    \cftinsertcode{BREAK}{\normalchangetocdepth{2}}
+    \renewcommand\contentsname{Bilagsoversigt}
+    \tableofcontents*
+    \endgroup
+    }
+\makeatother
+%
+\renewcommand\appendixpagename{Bilag}
+\renewcommand\appendixtocname{BILAG}
+%
+\patchcmd\addappheadtotoc{%
+  \addcontentsline{toc}{chapter}%
+}{%
+  \addcontentsline{toc}{part}%
+}{}{\errmessage{Could not patch \string\addappheadtotoc}}
+%####
+%################# END APPENDICES ToC ##################
+
+
+%%%%%%%%%%%%%% PAGE COLOR %%%%%%%%%%%%%%%
+%%%%%
+\newcommand{\onepagecolor}[1]{%
+\pagecolor{#1}\afterpage{\nopagecolor}}
+%####
+%########## END PAGE COLOR #############
+
+
+%%%%%%%%%%%%%% CUSTOM COMMANDS FOR LINENO %%%%%%%%%%%%%%%
+%%%%%
+% guide: skriv \halfref{<key>}{x} = Key[page:x]. "2" = number of commands. Husk, at med csquotes skal man skrive \textquote[{\halfref[]{}}].
+\newcommand*{\llabel}[2][]{\label{#2}{\hypertarget{line.#2}{\linelabel{#2line}}}} % A new command to label line numbers.
+\newcommand*{\fullref}[1]{\Aref{#1},\,\pageref{#1}:{\hyperlink{line.#1}{\ref*{#1line}}}} % A new command to cross-reference line numbers.
+\newcommand*{\fullrefrange}[2]{\Aref{#1},\,\pageref{#1}:{\hyperlink{line.#1}{\ref*{#1line}}}-{\hyperlink{line.#2}{\ref*{#2line}}}} % A new command to cross-reference line numbers.
+\newcommand*{\parenfullref}[1]{(\Aref{#1},\,\pageref{#1}:{\hyperlink{line.#1}{\ref*{#1line}}})} % A new command to cross-reference line numbers.
+\newcommand*{\parenfullrefrange}[2]{(\Aref{#1},\,\pageref{#1}:{\hyperlink{line.#1}{\ref*{#1line}}}-{\hyperlink{line.#2}{\ref*{#2line}}})} % A new command to cross-reference line numbers.
+\newcommand*{\halfref}[2][REMEMBERLINENUMBER]{\Aref{#2}{,\,\pageref{#2}:#1}} % A new command to cross-reference line numbers.
+\newcommand*{\parenhalfref}[2][REMEMBERLINENUMBER]{(\Aref{#2}{,\,\pageref{#2}:#1})} % A new command to cross-reference line numbers.
+%####
+%########## END CUSTOM COMMANDS FOR LINENO #############
+
+
+%%%%%%%%%%%%%% DEFINED CURRENCIES %%%%%%%%%%%%%%%
+%%%%% % with billion, write EUR/GBP/DOLLAR symbol before and bn after \dEUR[pre=true,after=bn]{1.7} = € 1.7bn, € 1.7mia, ... \SI{50}{\percent}
+\DefineCurrency{DKK}{name={krone},plural={kroner},symbol={dkr.},pre=false,iso={DKK},kind=symbol,base=2}
+\DefineCurrency{EUR}{name={euro},plural={euros},symbol={\euro},pre=false,iso={EUR},kind=symbol,base=2}
+\DefineCurrency{GBP}{name={pound},plural={pounds},symbol={\pounds},pre=false,iso={GBP},kind=symbol,base=2}
+\DefineCurrency{USD}{name={dollar},plural={dollars},symbol={\$},pre=false,iso={USD},kind=symbol,base=2}
+%####
+%########## END DEFINED CURRENCIES #############
+
+
+%%%%%%%%%%%%%% LOCAL TRANSLATIONS OF COMMAND OUTPUTS %%%%%%%%%%%%%%%
+%%%%%
+\renewcommand*{\chapterrefname}{Chapter~}
+\renewcommand*{\sectionrefname}{Section~}
+\renewcommand*{\tablerefname}{Table~}
+\renewcommand*{\figurerefname}{Figure~}
+%####
+%########## END LOCAL TRANSLATIONS OF COMMAND OUTPUTS #############
+
+
+%%%%%%%%%%%%%% HYPHENATION EXCEPTIONS %%%%%%%%%%%%%%%
+%%%%%
+% ALL LANGUAGES:
+\babelhyphenation{smart-aal-borg}
+\babelhyphenation{smart-ci-ty}
+% DANISH, NORDIC, ETC.:
+\babelhyphenation[danish,norwegian,swedish]{kom-mis-sion}
+\babelhyphenation[danish,norwegian,swedish]{push-be-ske-der}
+% ENGLISH:
+\babelhyphenation[english]{com-mis-sion}
+\babelhyphenation[english]{hy-po-the-ti-co-de-duc-tive}
+%####
+%########## END HYPHENATION EXCEPTIONS #############
+
+
+%#######################################################
+%################# END MACROS.tex ######################
+%#######################################################

@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% START P6_DOCATTRIBUTES.tex %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% TITLE PAPER1
+%%%%%
+\title{Treatment of Dual Diagnosis in Denmark}
+\subtitle{Models for Cooperation and Positions of Power}
+\fulltitle{\thetitle:\\\theSubtitle} % the entire title to be edited in one place
+\headertitle{\theSubtitle}
+
+
+%%%%%%%%%% AUTHORS PAPER1
+%%%%%
+\makeatletter % requires 'keyval' package
+%
+\define@key{author1}{name}[Katrine Schepelern Johansen]{#1}
+\define@key{author1}{initialsname}[K.~Johansen]{#1}
+\define@key{author1}{title}[]{#1}
+\define@key{author1}{institution}[Competence Centre for Dual Diagnosis, Mental Health Services in the Capital Region, Roskilde, Denmark]{#1}
+\define@key{author1}{email}[\mailto{katrine.schepelern.johansen@regionh.dk}]{#1}
+\define@key{author1}{orcidID}[\theORCIDiDgreen{}]{#1}
+%%%%%
+%
+\makeatother
+%
+%#########
+
+
+%%%%%%%%%% Print Author
+%%%%%
+\author{\protect\setkeys{author1}{name}%~\protect\setkeys{author1}{orcidID}
+%
+\smallskip
+%
+\footnotesize{
+\\\emph{\protect\setkeys{author1}{institution}}
+\\{\protect\setkeys{author1}{email}}%
+}}
+%####
+%#########
+
+
+%#######################################################
+%############# END P6_DOCATTRIBUTES.tex #################
+%#######################################################

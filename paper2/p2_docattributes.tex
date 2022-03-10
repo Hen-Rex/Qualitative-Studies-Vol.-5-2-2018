@@ -1,0 +1,67 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% START P2_DOCATTRIBUTES.tex %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% TITLE PAPER1
+%%%%%
+\title{A Case Study of Casework Tinkering}
+\subtitle{\thetitle}
+\fulltitle{\thetitle} % the entire title to be edited in one place
+\headertitle{\theSubtitle}
+
+
+%%%%%%%%%% AUTHORS PAPER1
+%%%%%
+\makeatletter % requires 'keyval' package
+%
+\define@key{author1}{name}[Maj Nygaard-Christensen]{#1}
+\define@key{author1}{initialsname}[M.~Nygaard-Christensen]{#1}
+\define@key{author1}{title}[]{#1}
+\define@key{author1}{institution}[Center for Alcohol and Drug Research, Department of Psychology, Aarhus University, Denmark]{#1}
+\define@key{author1}{email}[\mailto{mnc.crf@psy.au.dk}]{#1}
+\define@key{author1}{orcidID}[\theORCIDiDgreen{0000-0002-2370-9165}]{#1}
+%
+\define@key{author2}{name}[Bagga Bjerge]{#1}
+\define@key{author2}{initialsname}[B.~Bjerge]{#1}
+\define@key{author2}{title}[]{#1}
+\define@key{author2}{institution}[---same as author1---]{#1}
+\define@key{author2}{email}[\mailto{bb.crf@psy.au.dk}]{#1}
+\define@key{author2}{orcidID}[\theORCIDiDgreen{0000-0002-0942-0322}]{#1}
+%
+\define@key{author3}{name}[Jeppe Oute]{#1}
+\define@key{author3}{initialsname}[J.~Oute]{#1}
+\define@key{author3}{title}[]{#1}
+\define@key{author3}{institution}[---same as author1---]{#1}
+\define@key{author3}{email}[\mailto{jo.crf@psy.au.dk}]{#1}
+\define@key{author3}{orcidID}[\theORCIDiDgreen{0000-0002-4918-511X}]{#1}
+%%%%%
+%
+\makeatother
+%
+%#########
+
+
+%%%%%%%%%% Print Author
+%%%%%
+\author{\protect\setkeys{author1}{name}$^{1}$~\protect\setkeys{author1}{orcidID}
+\and
+\protect\setkeys{author2}{name}$^{2}$~\protect\setkeys{author2}{orcidID}
+\and
+\protect\setkeys{author3}{name}$^{3}$~\protect\setkeys{author3}{orcidID}
+%
+\smallskip
+%
+\footnotesize{
+\\\emph{\protect\setkeys{author1}{institution}}
+\\$^{1}${\protect\setkeys{author1}{email}}%
+\quad$^{2}${\protect\setkeys{author2}{email}}%
+\quad$^{3}${\protect\setkeys{author3}{email}}%
+}}
+%####
+%#########
+
+
+%#######################################################
+%############# END P2_DOCATTRIBUTES.tex #################
+%#######################################################
